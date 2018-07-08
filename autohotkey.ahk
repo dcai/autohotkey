@@ -11,7 +11,7 @@ LWin::LAlt
 
 SetTitleMatchMode, 2
 
-+^`::
++^3::
 ;+^esc::
 if WinExist("ahk_class PuTTY")
 	WinActivate
