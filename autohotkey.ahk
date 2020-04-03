@@ -4,33 +4,41 @@
 ; + => Shift
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
-;; Capslock::Esc
-Capslock::LCtrl
+Capslock::Esc
+;; Capslock::LCtrl
 LAlt::LWin
 LWin::LAlt
 
 SetTitleMatchMode, 2
 
-+^3::
-;+^esc::
-if WinExist("ahk_class PuTTY")
-	WinActivate
-return
-
 +^1::
-if WinExist("ahk_exe firefox.exe")
+;;if WinExist("ahk_exe firefox.exe")
+if WinExist("ahk_exe chrome.exe")
+;;if WinExist("ahk_exe msedge.exe")
     WinActivate
 else
-    ;;Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-    Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+    ;;Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+    Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    ;;Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
-
 
 +^2::
 if WinExist("ahk_exe sublime_text.exe")
     WinActivate
 else
     Run "C:\Program Files\Sublime Text 3\sublime_text"
+return
+
++^3::
+;+^esc::
+; if WinExist("ahk_exe WindowsTerminal.exe")
+if WinExist("ahk_class PuTTY")
+    WinActivate
+return
+
++^4::
+if WinExist("ahk_exe Discord.exe")
+    WinActivate
 return
 
 +^0::
