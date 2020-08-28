@@ -5,9 +5,10 @@
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 Capslock::Esc
-;; Capslock::LCtrl
+RAlt::Capslock
 LAlt::LWin
 LWin::LAlt
+ESC::`
 
 SetTitleMatchMode, 2
 
@@ -31,8 +32,8 @@ return
 
 +^3::
 ;+^esc::
-; if WinExist("ahk_exe WindowsTerminal.exe")
-if WinExist("ahk_class PuTTY")
+if WinExist("ahk_exe WindowsTerminal.exe")
+; if WinExist("ahk_class PuTTY")
     WinActivate
 return
 
@@ -41,9 +42,11 @@ if WinExist("ahk_exe Discord.exe")
     WinActivate
 return
 
-+^0::
-if WinExist("ahk_class Emacs")
++^-::
+if WinExist("ahk_exe firefox.exe")
 	WinActivate
+else
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe"
 return
 
 ^!\::
@@ -67,7 +70,6 @@ return
 ; macOS key bindings
 !f::Send ^f
 !q::!F4    ;退出
-!w::Send ^w ;关闭网页窗口
 !r::Send #r
 !n::Send ^n ;新建
 !t::Send ^t ; new tab
@@ -75,6 +77,11 @@ return
 !v::Send ^v ; paste
 !s::Send ^s ; save
 !e::Send #e ; win+e
+!w::Send ^w ;关闭网页窗口
+
+
+#w::Send ^w ; win+w to close c-w
+#c::Send ^c ; win+c to copy
 
 ^#v::SendRaw %clipboard%
 
