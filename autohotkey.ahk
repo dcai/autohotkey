@@ -6,9 +6,85 @@ SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 Capslock::Esc
 RAlt::Capslock
-LAlt::LWin
-LWin::LAlt
-ESC::`
+;LAlt::LWin
+;LWin::LAlt
+;ESC::`
+
+
+#o::
+o := HidListObj( )
+
+MsgBox % "" . o .Keyboard.1.KBSubType
+
+Return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HidListObj()
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+{
+    F := { Mouse:[], Keyboard:[], HID:[]}
+    B := {0:"Mouse", 1:"Keyboard", 2:"HID" }
+    DllCall( "GetRawInputDeviceList", "Ptr", 0, "UInt*", iCount, "UInt", A_PtrSize * 2)
+    VarSetCapacity( uHIDList, iCount * ( A_PtrSize * 2))
+    DllCall( "GetRawInputDeviceList", "Ptr", &uHIDList, "UInt*", iCount, "UInt", A_PtrSize * 2)
+ 
+    Loop % iCount
+    {
+        TypeName := b[Type:=NumGet( &uHIDList, (( A_Index - 1) * ( A_PtrSize * 2)) + A_PtrSize, "UInt")]
+        F[TypeName].Insert( J := [] )
+        J.Queue := A_Index
+        J.Handle := h := NumGet( &uHIDList, ( A_Index - 1) * ( A_PtrSize * 2))
+        DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x20000007, "Ptr", 0, "UInt*", iLength)
+        VarSetCapacity( Name, ( iLength + 1) * 2)
+        DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x20000007, "Str", Name, "UInt*", iLength)
+        J.Name := Name
+        DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x2000000b, "Ptr", 0, "UInt*", iLength)
+        VarSetCapacity( uInfo, iLength)
+        NumPut( iLength, uInfo, 0, "UInt") 
+        DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x2000000b, "Ptr", &uInfo, "UInt*", iLength)
+        
+        If ( Type = 0 )
+        {
+            J.ID                    := NumGet( uInfo, 8,"UInt")
+            J.Buttons           := NumGet( uInfo, 12,"UInt")
+            J.SampleRate        := NumGet( uInfo, 16,"UInt")
+            J.HWheel            := NumGet( uInfo, 20,"UInt")
+        } 
+        Else If ( Type = 1 )
+        {
+            J.KBType                := NumGet( uInfo,   8,"UInt")
+            J.KBSubType         := NumGet( uInfo, 12,"UInt")
+            J.KeyboardMode  := NumGet( uInfo, 16,"UInt")
+            J.FunctionKeys      := NumGet( uInfo, 20,"UInt")
+            J.Indicators            := NumGet( uInfo, 24,"UInt")
+            J.KeysTotal             := NumGet( uInfo, 28,"UInt")
+        } 
+        Else If ( Type =  2 )
+        {
+            J.VendorID          := NumGet( uInfo, 8,"UInt")
+            J.ProductID             := NumGet( uInfo, 12,"UInt")
+            J.VersionNumber     := NumGet( uInfo, 16,"UInt")
+            J.UsagePage         := NumGet( uInfo, 20 ,"UShort")
+            J.Usage             := NumGet( uInfo, 22, "UShort")
+            F[TypeName, J.Usage "_" J.UsagePage] := J
+        }
+    }
+    Return F
+}
+
+#p::
+SetTimer, PressTheKey, 10000
+Return
+
+^#p::
+SetTimer, PressTheKey, Off     
+Return
+
+
+PressTheKey:
+    Send, {Space}
+Return
+
 
 SetTitleMatchMode, 2
 
@@ -37,12 +113,23 @@ if WinExist("ahk_exe WindowsTerminal.exe")
     WinActivate
 return
 
-+^4::
+
++^`::
 if WinExist("ahk_exe Discord.exe")
     WinActivate
 return
 
-+^-::
++^s::
+if WinExist("ahk_exe Slack.exe")
+    WinActivate
+return
+
++^e::
+if WinExist("ahk_exe msedge.exe")
+    WinActivate
+return
+
++^f::
 if WinExist("ahk_exe firefox.exe")
 	WinActivate
 else
