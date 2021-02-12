@@ -12,14 +12,14 @@ RAlt::Capslock
 ;ESC::`
 
 +^1::
-;;if WinExist("ahk_exe firefox.exe")
-if WinExist("ahk_exe chrome.exe")
-;;if WinExist("ahk_exe msedge.exe")
+if WinExist("ahk_exe firefox.exe")
+; if WinExist("ahk_exe chrome.exe")
+; if WinExist("ahk_exe msedge.exe")
     WinActivate
 else
-    ;;Run "C:\Program Files\Mozilla Firefox\firefox.exe"
-    Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-    ;;Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+    ; Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    ; Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
 +^2::
