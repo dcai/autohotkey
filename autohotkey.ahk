@@ -11,6 +11,13 @@ RAlt::Capslock
 ;LWin::LAlt
 ;ESC::`
 
+#e::
+if WinExist("ahk_class CabinetWClass")
+    WinActivate
+else
+    Run "C:\Windows\explorer.exe"
+return
+
 +^1::
 if WinExist("ahk_exe firefox.exe")
 ; if WinExist("ahk_exe chrome.exe")
@@ -130,13 +137,6 @@ PressTheKey:
     Send, {Space}
 Return
 ; Timer END
-
-
-
-#o::
-    o := HidListObj( )
-    MsgBox % "" . o .Keyboard.1.KBSubType
-Return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 HidListObj()
