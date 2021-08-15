@@ -36,6 +36,13 @@ else
     Run "C:\Program Files\Sublime Text 3\sublime_text"
 return
 
++^Enter::
+if WinExist("ahk_exe Postman.exe")
+    WinActivate
+else
+    Run "C:\Users\dcai\AppData\Local\Postman\Postman.exe"
+return
+
 +^3::
 if WinExist("ahk_exe WindowsTerminal.exe")
     WinActivate
@@ -53,6 +60,11 @@ return
 
 +^e::
 if WinExist("ahk_exe msedge.exe")
+    WinActivate
+return
+
++^v::
+if WinExist("ahk_exe Code.exe")
     WinActivate
 return
 
@@ -130,13 +142,20 @@ SetTimer, PressTheKey, 10000
 Return
 
 ^#p::
-SetTimer, PressTheKey, Off     
+SetTimer, PressTheKey, Off
 Return
 
 PressTheKey:
     Send, {Space}
 Return
 ; Timer END
+
+^#+o::
+    o := HidListObj( )
+    KeyboardId := o.Keyboard.1.KBSubType
+    MsgBox, autohotkey version: %A_AhkVersion%
+    MsgBox, % "keyboard id: " . KeyboardId
+Return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 HidListObj()
@@ -147,7 +166,7 @@ HidListObj()
     DllCall( "GetRawInputDeviceList", "Ptr", 0, "UInt*", iCount, "UInt", A_PtrSize * 2)
     VarSetCapacity( uHIDList, iCount * ( A_PtrSize * 2))
     DllCall( "GetRawInputDeviceList", "Ptr", &uHIDList, "UInt*", iCount, "UInt", A_PtrSize * 2)
- 
+
     Loop % iCount
     {
         TypeName := b[Type:=NumGet( &uHIDList, (( A_Index - 1) * ( A_PtrSize * 2)) + A_PtrSize, "UInt")]
@@ -160,16 +179,16 @@ HidListObj()
         J.Name := Name
         DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x2000000b, "Ptr", 0, "UInt*", iLength)
         VarSetCapacity( uInfo, iLength)
-        NumPut( iLength, uInfo, 0, "UInt") 
+        NumPut( iLength, uInfo, 0, "UInt")
         DllCall( "GetRawInputDeviceInfo", "Ptr", h, "UInt", 0x2000000b, "Ptr", &uInfo, "UInt*", iLength)
-        
+
         If ( Type = 0 )
         {
             J.ID                    := NumGet( uInfo, 8,"UInt")
             J.Buttons           := NumGet( uInfo, 12,"UInt")
             J.SampleRate        := NumGet( uInfo, 16,"UInt")
             J.HWheel            := NumGet( uInfo, 20,"UInt")
-        } 
+        }
         Else If ( Type = 1 )
         {
             J.KBType                := NumGet( uInfo,   8,"UInt")
@@ -178,7 +197,7 @@ HidListObj()
             J.FunctionKeys      := NumGet( uInfo, 20,"UInt")
             J.Indicators            := NumGet( uInfo, 24,"UInt")
             J.KeysTotal             := NumGet( uInfo, 28,"UInt")
-        } 
+        }
         Else If ( Type =  2 )
         {
             J.VendorID          := NumGet( uInfo, 8,"UInt")
