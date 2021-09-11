@@ -36,22 +36,21 @@ else
     Run "C:\Program Files\Sublime Text 3\sublime_text"
 return
 
-+^Enter::
-if WinExist("ahk_exe Postman.exe")
-    WinActivate
-else
-    Run "C:\Users\dcai\AppData\Local\Postman\Postman.exe"
-return
-
 +^3::
 if WinExist("ahk_exe WindowsTerminal.exe")
     WinActivate
 return
 
 +^`::
+if WinExist("ahk_exe WindowsTerminal.exe")
+    WinActivate
+return
+
++^d::
 if WinExist("ahk_exe Discord.exe")
     WinActivate
 return
+
 
 +^s::
 if WinExist("ahk_exe Slack.exe")
@@ -61,6 +60,8 @@ return
 +^e::
 if WinExist("ahk_exe msedge.exe")
     WinActivate
+else
+    Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
 +^v::
@@ -73,6 +74,20 @@ if WinExist("ahk_exe firefox.exe")
 	WinActivate
 else
     Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+return
+
++^w::
+if WinExist("ahk_exe WeChat.exe")
+    WinActivate
+else
+    Run "C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
+return
+
++^Enter::
+if WinExist("ahk_exe Postman.exe")
+    WinActivate
+else
+    Run "C:\Users\dcai\AppData\Local\Postman\Postman.exe"
 return
 
 ^!r::
