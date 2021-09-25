@@ -7,9 +7,12 @@ SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 Capslock::Esc
 RAlt::Capslock
+;ESC::`
+
+;; begin swap win and Alt
 ;LAlt::LWin
 ;LWin::LAlt
-;ESC::`
+;; end of swap win and alt 
 
 #e::
 if WinExist("ahk_class CabinetWClass")
@@ -107,6 +110,10 @@ return
 !w::Send ^w ;关闭网页窗口
 #w::Send ^w ; win+w to close c-w
 #c::Send ^c ; win+c to copy
+#z::Send ^z
+#v::Send ^v
+#t::Send ^t
+#r::Send ^r
 ^#v::SendRaw %clipboard%
 
 
