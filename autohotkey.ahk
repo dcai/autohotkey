@@ -5,7 +5,7 @@
 SetTitleMatchMode, 2
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
-Capslock::Esc
+Capslock::LCtrl
 RAlt::Capslock
 ;ESC::`
 
@@ -159,13 +159,13 @@ return
 
 
 ; Timer
-#p::
-SetTimer, PressTheKey, 10000
-Return
+; #p::
+; SetTimer, PressTheKey, 10000
+; Return
 
-^#p::
-SetTimer, PressTheKey, Off
-Return
+; ^#p::
+; SetTimer, PressTheKey, Off
+; Return
 
 PressTheKey:
     Send, {Space}
