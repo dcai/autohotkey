@@ -75,6 +75,8 @@ return
 +^d::
 if WinExist("ahk_exe Discord.exe")
     WinActivate
+else
+    Run "C:\Users\dcai\AppData\Local\Discord\Update.exe" --processStart Discord.exe
 return
 
 
