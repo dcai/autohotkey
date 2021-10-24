@@ -5,14 +5,33 @@
 SetTitleMatchMode, 2
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
-Capslock::LCtrl
+;Capslock::LCtrl
 RAlt::Capslock
 ;ESC::`
-
-;; begin swap win and Alt
+;; Begin swap win and Alt
 ;LAlt::LWin
 ;LWin::LAlt
-;; end of swap win and alt 
+;; End of swap win and alt
+
+; macOS key bindings
+#w::Send ^w ; win+w to close c-w
+#c::Send ^c ; win+c to copy
+#z::Send ^z ; win+z
+#v::Send ^v ; win+v
+#t::Send ^t ; win+t
+#s::Send ^s ; win+s
+#l::Send ^l ; win+l
+
+!f::Send ^f ; alt+f => ctrl+f
+!q::!F4     ; alt+q 退出
+!n::Send ^n ; alt+n 新建
+!t::Send ^t ; alt+t new tab
+!c::Send ^c ; alt+c copy
+!v::Send ^v ; alt+v paste
+!s::Send ^s ; alt+s save
+!e::Send #e ; alt+e to win+e
+!w::Send ^w ; alt+w to ctrl+w 关闭网页窗口
+
 
 #e::
 if WinExist("ahk_class CabinetWClass")
@@ -97,25 +116,7 @@ return
     Reload  ; Assign Ctrl-Alt-R as a hotkey to restart the script.
 return
 
-; macOS key bindings
-!f::Send ^f
-!q::!F4    ;退出
-!r::Send #r
-!n::Send ^n ;新建
-!t::Send ^t ; new tab
-!c::Send ^c ; copy
-!v::Send ^v ; paste
-!s::Send ^s ; save
-!e::Send #e ; win+e
-!w::Send ^w ;关闭网页窗口
-#w::Send ^w ; win+w to close c-w
-#c::Send ^c ; win+c to copy
-#z::Send ^z
-#v::Send ^v
-#t::Send ^t
-#r::Send ^r
 ^#v::SendRaw %clipboard%
-
 
 ^#Enter::
     WinMaximize, A  ; Assign a hotkey to maximize the active window.
