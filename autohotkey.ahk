@@ -14,13 +14,17 @@ RAlt::Capslock
 ;; End of swap win and alt
 
 ; macOS key bindings
-#w::Send ^w ; win+w to close c-w
-#c::Send ^c ; win+c to copy
-#z::Send ^z ; win+z
+#w::Send ^w ; win+w, close c-w
+#a::Send ^a ; win+a
+#c::Send ^c ; win+c, copy
+#z::Send ^z ; win+z, undo
+#y::Send ^y ; win+y, redo
 #v::Send ^v ; win+v
 #t::Send ^t ; win+t
 #s::Send ^s ; win+s
-#l::Send ^l ; win+l
+#o::Send ^o ; win+
+#f::Send ^f ; win+f
+#q::Send !{F4} ; win+q
 
 !f::Send ^f ; alt+f => ctrl+f
 !q::!F4     ; alt+q 退出
