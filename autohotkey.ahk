@@ -80,11 +80,6 @@ else
 return
 
 
-+^s::
-if WinExist("ahk_exe Slack.exe")
-    WinActivate
-return
-
 +^e::
 if WinExist("ahk_exe msedge.exe")
     WinActivate
@@ -92,16 +87,28 @@ else
     Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
-+^v::
-if WinExist("ahk_exe Code.exe")
-    WinActivate
-return
-
 +^f::
 if WinExist("ahk_exe firefox.exe")
 	WinActivate
 else
     Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+return
+
++^s::
+if WinExist("ahk_exe Slack.exe")
+    WinActivate
+return
+
++^t::
+if WinExist("ahk_exe ahk_exe Telegram.exe")
+    WinActivate
+else
+    Run "C:\Users\dcai\AppData\Roaming\Telegram Desktop\Telegram.exe"
+return
+
++^v::
+if WinExist("ahk_exe Code.exe")
+    WinActivate
 return
 
 +^w::
