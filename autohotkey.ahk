@@ -5,7 +5,7 @@
 SetTitleMatchMode, 2
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
-;Capslock::LCtrl
+Capslock::LCtrl
 RAlt::Capslock
 ;ESC::`
 ;; Begin swap win and Alt
