@@ -44,19 +44,19 @@ else
     Run "C:\Windows\explorer.exe"
 return
 
-+^1::
++^q::
 if WinExist("ahk_exe WindowsTerminal.exe")
     WinActivate
 return
 
-+^2::
++^w::
 if WinExist("ahk_exe sublime_text.exe")
     WinActivate
 else
     Run "C:\Program Files\Sublime Text 3\sublime_text"
 return
 
-+^3::
++^e::
 if WinExist("ahk_exe firefox.exe")
 ; if WinExist("ahk_exe chrome.exe")
 ; if WinExist("ahk_exe msedge.exe")
@@ -80,7 +80,7 @@ else
 return
 
 
-+^e::
++^z::
 if WinExist("ahk_exe msedge.exe")
     WinActivate
 else
@@ -99,19 +99,19 @@ if WinExist("ahk_exe Slack.exe")
     WinActivate
 return
 
-+^t::
-if WinExist("ahk_exe ahk_exe Telegram.exe")
-    WinActivate
-else
-    Run "C:\Users\dcai\AppData\Roaming\Telegram Desktop\Telegram.exe"
-return
+; +^t::
+; if WinExist("ahk_exe ahk_exe Telegram.exe")
+;     WinActivate
+; else
+;     Run "C:\Users\dcai\AppData\Roaming\Telegram Desktop\Telegram.exe"
+; return
 
 +^v::
 if WinExist("ahk_exe Code.exe")
     WinActivate
 return
 
-+^w::
++^x::
 if WinExist("ahk_exe WeChat.exe")
     WinActivate
 else
