@@ -26,15 +26,15 @@ RAlt::Capslock
 #f::Send ^f ; win+f
 #q::Send !{F4} ; win+q
 
-!f::Send ^f ; alt+f => ctrl+f
-!q::!F4     ; alt+q 退出
-!n::Send ^n ; alt+n 新建
-!t::Send ^t ; alt+t new tab
-!c::Send ^c ; alt+c copy
-!v::Send ^v ; alt+v paste
-!s::Send ^s ; alt+s save
-!e::Send #e ; alt+e to win+e
-!w::Send ^w ; alt+w to ctrl+w 关闭网页窗口
+; !f::Send ^f ; alt+f => ctrl+f
+; !q::!F4     ; alt+q 退出
+; !n::Send ^n ; alt+n 新建
+; !t::Send ^t ; alt+t new tab
+; !c::Send ^c ; alt+c copy
+; !v::Send ^v ; alt+v paste
+; !s::Send ^s ; alt+s save
+; !e::Send #e ; alt+e to win+e
+; !w::Send ^w ; alt+w to ctrl+w 关闭网页窗口
 
 
 #e::
@@ -44,19 +44,19 @@ else
     Run "C:\Windows\explorer.exe"
 return
 
-+^q::
+!q::
 if WinExist("ahk_exe WindowsTerminal.exe")
     WinActivate
 return
 
-+^w::
+!w::
 if WinExist("ahk_exe sublime_text.exe")
     WinActivate
 else
     Run "C:\Program Files\Sublime Text 3\sublime_text"
 return
 
-+^e::
+!e::
 if WinExist("ahk_exe firefox.exe")
 ; if WinExist("ahk_exe chrome.exe")
 ; if WinExist("ahk_exe msedge.exe")
@@ -67,12 +67,7 @@ else
     ; Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
-+^`::
-if WinExist("ahk_exe WindowsTerminal.exe")
-    WinActivate
-return
-
-+^d::
+!d::
 if WinExist("ahk_exe Discord.exe")
     WinActivate
 else
@@ -80,21 +75,21 @@ else
 return
 
 
-+^z::
+!z::
 if WinExist("ahk_exe msedge.exe")
     WinActivate
 else
     Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
-+^f::
+!f::
 if WinExist("ahk_exe firefox.exe")
 	WinActivate
 else
     Run "C:\Program Files\Mozilla Firefox\firefox.exe"
 return
 
-+^s::
+!s::
 if WinExist("ahk_exe Slack.exe")
     WinActivate
 return
@@ -106,19 +101,19 @@ return
 ;     Run "C:\Users\dcai\AppData\Roaming\Telegram Desktop\Telegram.exe"
 ; return
 
-+^v::
+!v::
 if WinExist("ahk_exe Code.exe")
     WinActivate
 return
 
-+^x::
+!x::
 if WinExist("ahk_exe WeChat.exe")
     WinActivate
 else
     Run "C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
 return
 
-+^Enter::
+!Enter::
 if WinExist("ahk_exe Postman.exe")
     WinActivate
 else
