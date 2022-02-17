@@ -2,6 +2,10 @@
 ; ! => Alt
 ; ^ => Ctrl
 ; + => Shift
+
+; https://superuser.com/a/727170
+SetDisableLockWorkstationRegKeyValue( 1 )
+
 SetTitleMatchMode, 2
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
@@ -14,6 +18,7 @@ RAlt::Capslock
 ;; End of swap win and alt
 
 ; macOS key bindings
+#l::Send ^l ; win+l
 #w::Send ^w ; win+w, close c-w
 #a::Send ^a ; win+a
 #c::Send ^c ; win+c, copy
@@ -94,12 +99,12 @@ if WinExist("ahk_exe Slack.exe")
     WinActivate
 return
 
-; +^t::
-; if WinExist("ahk_exe ahk_exe Telegram.exe")
-;     WinActivate
-; else
-;     Run "C:\Users\dcai\AppData\Roaming\Telegram Desktop\Telegram.exe"
-; return
+!g::
+if WinExist("ahk_exe chrome.exe")
+    WinActivate
+else
+    Run "C:\Program Files\Google\Chrome\Application\chrome.exe"
+return
 
 !v::
 if WinExist("ahk_exe Code.exe")
@@ -187,6 +192,11 @@ Return
     MsgBox, autohotkey version: %A_AhkVersion%
     MsgBox, % "keyboard id: " . KeyboardId
 Return
+
+SetDisableLockWorkstationRegKeyValue( value )
+{
+  RegWrite, REG_DWORD, HKEY_CURRENT_USER, Software\Microsoft\Windows\CurrentVersion\Policies\System, DisableLockWorkstation, %value%
+}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 HidListObj()
