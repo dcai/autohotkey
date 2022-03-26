@@ -18,7 +18,6 @@ RAlt::Capslock
 ;; End of swap win and alt
 
 ; macOS key bindings
-#l::Send ^l ; win+l
 #w::Send ^w ; win+w, close c-w
 #a::Send ^a ; win+a
 #c::Send ^c ; win+c, copy
@@ -30,6 +29,9 @@ RAlt::Capslock
 #o::Send ^o ; win+
 #f::Send ^f ; win+f
 #q::Send !{F4} ; win+q
+
+#Space::
+return
 
 ; !f::Send ^f ; alt+f => ctrl+f
 ; !q::!F4     ; alt+q 退出
@@ -62,13 +64,13 @@ else
 return
 
 !e::
-if WinExist("ahk_exe firefox.exe")
-; if WinExist("ahk_exe chrome.exe")
+; if WinExist("ahk_exe firefox.exe")
+if WinExist("ahk_exe chrome.exe")
 ; if WinExist("ahk_exe msedge.exe")
     WinActivate
 else
-    Run "C:\Program Files\Mozilla Firefox\firefox.exe"
-    ; Run "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    ; Run "C:\Program Files\Mozilla Firefox\firefox.exe"
+    Run "C:\Program Files\Google\Chrome\Application\chrome.exe"
     ; Run "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 return
 
