@@ -4,7 +4,7 @@
 ; + => Shift
 
 ; https://superuser.com/a/727170
-SetDisableLockWorkstationRegKeyValue( 1 )
+SetDisableLockWorkstationRegKeyValue(1)
 
 SetTitleMatchMode, 2
 SetNumLockState, AlwaysOn
@@ -17,7 +17,7 @@ RAlt::Capslock
 ;LWin::LAlt
 ;; End of swap win and alt
 
-; macOS key bindings
+; macOS style key bindings
 #w::Send ^w ; win+w, close c-w
 #a::Send ^a ; win+a
 #c::Send ^c ; win+c, copy
@@ -31,9 +31,6 @@ RAlt::Capslock
 #q::Send !{F4} ; win+q
 #l::Send ^l ; win+l
 
-#Space::
-return
-
 ; !f::Send ^f ; alt+f => ctrl+f
 ; !q::!F4     ; alt+q 退出
 ; !n::Send ^n ; alt+n 新建
@@ -43,7 +40,6 @@ return
 ; !s::Send ^s ; alt+s save
 ; !e::Send #e ; alt+e to win+e
 ; !w::Send ^w ; alt+w to ctrl+w 关闭网页窗口
-
 
 #e::
 if WinExist("ahk_class CabinetWClass")
@@ -130,15 +126,15 @@ return
 ^#v::SendRaw %clipboard%
 
 !Enter::
-    SysGet, MonitorWorkArea, MonitorWorkArea, 1
+  SysGet, MonitorWorkArea, MonitorWorkArea, 1
+  WinGet MX, MinMax, A
+  if MX {
+    WinRestore A
     ; move to center of screen
-    WinMove,A,,(MonitorWorkAreaRight-MonitorWorkAreaRight/1.5)/2, (MonitorWorkAreaBottom-MonitorWorkAreaBottom/1.2)/2, MonitorWorkAreaRight/1.5 , MonitorWorkAreaBottom/1.2
-    ; WinMaximize, A  ; Assign a hotkey to maximize the active window.
-   WinGet MX, MinMax, A
-   if MX
-        WinRestore A
-   else
-        WinMaximize A
+    WinMove,A,,MonitorWorkAreaRight*0.25, MonitorWorkAreaBottom*0.1, MonitorWorkAreaRight*0.5, MonitorWorkAreaBottom*0.8
+  } else {
+    WinMaximize A
+  }
 return
 
 ; https://superuser.com/questions/285356/possible-to-snap-top-bottom-instead-of-just-left-right-in-windows-7
