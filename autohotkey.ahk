@@ -149,11 +149,10 @@ return
     ;   means the center of the active window is a positive X coordinate
     if ( X + W/2 > 0 ) {
         SysGet, MonitorWorkArea, MonitorWorkArea, 1
-        WinMove,A,,X,0 , , (MonitorWorkAreaBottom/2)
     } else {
         SysGet, MonitorWorkArea, MonitorWorkArea, 2
-        WinMove,A,,X,0 , , (MonitorWorkAreaBottom/2)
     }
+    WinMove,A,,X, 0, , (MonitorWorkAreaBottom*0.5)
 return
 
 ; Move window down (Windows + ctrl + j ... NOTE must maximize window first)
@@ -166,11 +165,10 @@ return
     ;   means the center of the active window is a positive X coordinate
     if ( X + W/2 > 0 ) {
         SysGet, MonitorWorkArea, MonitorWorkArea, 1
-        WinMove,A,,X,MonitorWorkAreaBottom/2 , , (MonitorWorkAreaBottom/2)
     } else {
         SysGet, MonitorWorkArea, MonitorWorkArea, 2
-        WinMove,A,,X,MonitorWorkAreaBottom/2 , , (MonitorWorkAreaBottom/2)
     }
+    WinMove,A,, X, MonitorWorkAreaBottom*0.5, , (MonitorWorkAreaBottom*0.5)
 return
 
 
@@ -195,20 +193,6 @@ return
     screenHeight = %MonitorWorkAreaBottom%
     WinMove,A,,screenWidth-screenWidth/2.5,0,screenWidth/2.5,screenHeight
 return
-
-
-; Timer
-; #p::
-; SetTimer, PressTheKey, 10000
-; Return
-
-; ^#p::
-; SetTimer, PressTheKey, Off
-; Return
-; PressTheKey:
-;     Send, {Space}
-; Return
-; Timer END
 
 ^#+o::
     o := HidListObj( )
