@@ -29,6 +29,7 @@ RAlt::Capslock
 #o::Send ^o ; win+
 #f::Send ^f ; win+f
 #q::Send !{F4} ; win+q
+#l::Send ^l ; win+l
 
 #Space::
 return
@@ -108,11 +109,6 @@ else
     Run "C:\Program Files\Google\Chrome\Application\chrome.exe"
 return
 
-!v::
-if WinExist("ahk_exe Code.exe")
-    WinActivate
-return
-
 !x::
 if WinExist("ahk_exe WeChat.exe")
     WinActivate
@@ -120,7 +116,7 @@ else
     Run "C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
 return
 
-!Enter::
+!v::
 if WinExist("ahk_exe Postman.exe")
     WinActivate
 else
@@ -133,14 +129,22 @@ return
 
 ^#v::SendRaw %clipboard%
 
-^#Enter::
-    WinMaximize, A  ; Assign a hotkey to maximize the active window.
+!Enter::
+    SysGet, MonitorWorkArea, MonitorWorkArea, 1
+    ; move to center of screen
+    WinMove,A,,(MonitorWorkAreaRight-MonitorWorkAreaRight/1.5)/2, (MonitorWorkAreaBottom-MonitorWorkAreaBottom/1.2)/2, MonitorWorkAreaRight/1.5 , MonitorWorkAreaBottom/1.2
+    ; WinMaximize, A  ; Assign a hotkey to maximize the active window.
+   WinGet MX, MinMax, A
+   if MX
+        WinRestore A
+   else
+        WinMaximize A
 return
 
 ; https://superuser.com/questions/285356/possible-to-snap-top-bottom-instead-of-just-left-right-in-windows-7
 ; credit: http://www.pixelchef.net/how-snap-windows-horizontally-windows-7
-; Move window up (Windows + Shift + UP ... NOTE must maximize window first)
-+#Up::
+; Move window up (Windows + ctrl + k ... NOTE must maximize window first)
+!k::
     WinGetPos,X,Y,W,H,A,,,
     WinMaximize
     WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
@@ -156,8 +160,8 @@ return
     }
 return
 
-; Move window down (Windows + Shift + DOWN ... NOTE must maximize window first)
-+#Down::
+; Move window down (Windows + ctrl + j ... NOTE must maximize window first)
+!j::
     WinGetPos,X,Y,W,H,A,,,
     WinMaximize
     WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
@@ -171,6 +175,29 @@ return
         SysGet, MonitorWorkArea, MonitorWorkArea, 2
         WinMove,A,,X,MonitorWorkAreaBottom/2 , , (MonitorWorkAreaBottom/2)
     }
+return
+
+
+; move window left part
+!h::
+    WinGetPos,X,Y,W,H,A,,,
+    WinMaximize
+    WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+    SysGet, MonitorWorkArea, MonitorWorkArea, 1
+    screenWidth = %MonitorWorkAreaRight%
+    screenHeight = %MonitorWorkAreaBottom%
+    WinMove,A,,0,0,screenWidth/2.5,screenHeight
+return
+
+; move window to right part
+!l::
+    WinGetPos,X,Y,W,H,A,,,
+    WinMaximize
+    WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+    SysGet, MonitorWorkArea, MonitorWorkArea, 1
+    screenWidth = %MonitorWorkAreaRight%
+    screenHeight = %MonitorWorkAreaBottom%
+    WinMove,A,,screenWidth-screenWidth/2.5,0,screenWidth/2.5,screenHeight
 return
 
 
@@ -182,10 +209,9 @@ return
 ; ^#p::
 ; SetTimer, PressTheKey, Off
 ; Return
-
-PressTheKey:
-    Send, {Space}
-Return
+; PressTheKey:
+;     Send, {Space}
+; Return
 ; Timer END
 
 ^#+o::
